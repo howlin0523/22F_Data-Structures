@@ -1,6 +1,21 @@
+#ifndef LAB
+#define LAB
+
 #include <iostream>
 #include <vector>
-#include "lab1.h"
-#include "func.cpp"
 
 using namespace std;
+
+typedef struct ListNode
+{
+    float coef;
+    float expn;
+    struct ListNode *next;
+}ListNode;
+
+class Func{
+
+};
+
+
+#endif
