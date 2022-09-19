@@ -20,6 +20,8 @@ int main()
         cout << "a\'(x)=";
         F.derive();
         cout << "input x:";
+        cin.clear();
+        cin.ignore();
         float x=0;
         cin >> x;
         cout << "a(" << x << ")=" << F.calValue(x) << endl;

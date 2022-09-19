@@ -84,6 +84,7 @@ void Func::insert(LNode *node, int n)
 void Func::printPoly(int n)
 {
     LNode *t = head[n - 1];
+    LNode *t1 = head[n - 1];
     cout << head[n - 1]->coef;
     while (t->next)
     {
@@ -91,10 +92,9 @@ void Func::printPoly(int n)
         t = t->next;
     }
     cout << endl;
-    cout<<"stop"; 
 
     int temp = 0;
-    LNode *t1 = head[n - 1];
+
     cout << head[n - 1]->coef << ":";
     while (t1->next)
     {
@@ -107,7 +107,7 @@ void Func::printPoly(int n)
         else if ((t1->next->coef == 1 || t1->next->coef == -1) && t1->next->expn == 0)
             cout << 1;
         if (t1->next->expn != 0 && t1->next->expn != 1)
-            cout << "x^" << t->next->expn;
+            cout << "x^" << t1->next->expn;
         else if (t1->next->expn == 1)
             cout << "x";
         t1 = t1->next;
