@@ -15,7 +15,7 @@
 
 ## 测试数据
 
-1. $\left(2 x+5 x^8-3.1 x^{11}\right)+\left(7-5 x^8+11 x^9\right) =\left(-3.1 x^{11}+11 x^8+2 x+7\right)$
+1. $\left(2 x+5 x^8-3.1 x^{11}\right)+\left(7-5 x^8+11 x^9\right) =\left(-3.1 x^{11}+11 x^9+2 x+7\right)$
 2. $\left(6 x^{-3}-x+4.4 x^2-1.2 x^9\right)-\left(-6 x^{-3}+5.4 x^2 - x^2+7.8 x^{15}\right) =\left(-7.8 x^{15}-1.2 x^9+12 x^{-3}-x\right)$
 3. $\left(1+x+x^2+x^3+x^4+x^5\right)+\left(-x^3-x^4\right) =\left(1+x+x^2+x^5\right)$
 4. $\left(x+x^3\right)+\left(-x-x^3\right)=0$
