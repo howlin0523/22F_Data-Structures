@@ -1,20 +1,82 @@
-/**
- * @file func.cpp
- * @author howlinggggg (howlin0523@mail.ustc.edu.cn)
- * @brief
- * @version 0.1
- * @date 2022-10-16
- *
- * @copyright Copyright (c) 2022
- *
- */
-#include <iostream>
-#include <vector>
-#include <math.h>
-#include "lab1.h"
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, enumerate, framed, graphicx, hyperref, listings, mathrsfs, xcolor}
 
-using namespace std;
+\lstset{
+	language=c++,
+	breaklines,
+	columns=fixed,
+	numbers=left,                                        % 在左侧显示行号
+	numberstyle=\tiny\color{gray},                       % 设定行号格式
+	frame=true,                                          % 不显示背景边框
+	backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
+	keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
+	numberstyle=\footnotesize\color{darkgray},
+	commentstyle=\it\color[RGB]{0,96,96},                % 设置代码注释的格式
+	stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   % 设置字符串格式
+	showstringspaces=false,                              % 不显示字符串中的空格
+   }
 
+
+
+\title{\textbf{一元稀疏多项式计算器\ 实验报告}}
+\author{howlinggggg}
+\date{\today}
+\linespread{1.2}
+
+\begin{document}
+\maketitle
+\section{实验任务}
+\subsection{基本要求}
+\begin{enumerate}
+	\item 输入并建立多项式;
+	\item 输出多项式, 输出形式为整数序列; $n, c_1, e_1, c_2, e_2, \dots, c_n, e_n$, 其中 $n$ 是多项式的项数, $c_i$ 和 $e_i$ 分别是第 $i$ 项的系数和指数, 序列按指数降序排列;
+	\item 多项式 $a$ 和 $b$ 相加, 建立多项式 $a+b$;
+	\item 多项式 $a$ 和 $b$ 相减, 建立多项式 $a-b$.
+\end{enumerate}
+\subsection{选做内容}
+\begin{enumerate}
+	\item [1.]计算多项式在 $x$ 处的值。
+	\item [2.]求多项式 $a$ 的导函数 $a'$
+	\item [4.]多项式的输出形式为类数学表达式.
+\end{enumerate}
+
+\section{概要设计}
+\begin{figure*}[htbp]
+	\centering
+	\includegraphics[width = 0.63\textwidth]{latex/main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph.pdf}
+\end{figure*}
+\section{详细设计}
+\subsection{class Func}
+\begin{lstlisting}
+	在class定义了此次实验需要用到的函数
+class Func
+{
+private:
+    vector<LNode *> head;
+
+public:
+    Func()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            LNode *headx = new (LNode);
+            headx->coef = 0;
+            headx->next = NULL;
+            head.push_back(headx);
+        }
+    }
+    bool init();
+    void insert(LNode *node, int n);
+    void printPoly(int n);
+    void add();
+    void minus();
+    float calValue(float x);
+    void derive();
+};
+\end{lstlisting}
+\subsection{bool init()}
+初始化多项式a和多项式b，将输入使用insert()插入linklist中
+\begin{lstlisting}
 bool Func::init()
 {
     cout << "input poly a:";
@@ -61,7 +123,10 @@ bool Func::init()
     printPoly(2);
     return true;
 }
-
+\end{lstlisting}
+\subsection{void insert(LNode *node, int n)}
+将LNode插入第n个linklist中，其中需要判断是否存在和插入的LNode相同的expn，若存在则将coef相加，否则插入到linklist中并将后面的节点后移。
+\begin{lstlisting}
 void Func::insert(LNode *node, int n)
 {
     LNode *t = head[n - 1];
@@ -88,8 +153,11 @@ void Func::insert(LNode *node, int n)
     }
     ++head[n - 1]->coef;
 }
-
-void Func::printPoly(int n)
+\end{lstlisting}
+\subsection{void printPoly(int n)}
+实现输出多项式和选做内容4, 需要特别处理的是若expn为0，则只输出coef；若coef为$\pm 1$则只输出expn。在选做4中还必须特别考虑第一项，若第一项为+则只输出系数。
+\begin{lstlisting}
+void printPoly(int n)
 {
     LNode *t = head[n - 1];
     LNode *t1 = head[n - 1];
@@ -123,7 +191,10 @@ void Func::printPoly(int n)
     }
     cout << endl;
 }
-
+\end{lstlisting}
+\subsection{void plus()}
+将多项式相加并插入linklist[2]，若相加后系数为0则不插入
+\begin{lstlisting}
 void Func::plus()
 {
     LNode *t1 = head[0];
@@ -181,7 +252,11 @@ void Func::plus()
     }
     printPoly(3);
 }
+\end{lstlisting}
 
+\subsection{void minus()}
+将多项式相减并插入linklist[3]，若相减后系数为0则不插入
+\begin{lstlisting}
 void Func::minus()
 {
     LNode *t1 = head[0];
@@ -239,7 +314,9 @@ void Func::minus()
     }
     printPoly(4);
 }
-
+\end{lstlisting}
+\subsection{float calValue(float x)}
+\begin{lstlisting}
 float Func::calValue(float x)
 {
     float sum = 0;
@@ -251,7 +328,11 @@ float Func::calValue(float x)
     }
     return sum;
 }
+\end{lstlisting}
 
+\subsection{void derive()}
+求得$a'$并存入linklist[4]
+\begin{lstlisting}
 void Func::derive()
 {
     LNode *t = head[0];
@@ -269,3 +350,15 @@ void Func::derive()
     }
     printPoly(5);
 }
+\end{lstlisting}
+\section{测试结果}
+\subsection{输入数据}
+多项式a: $\left(2 x+5 x^8-3.1 x^{11}\right)$， 多项式b:$\left(7-5 x^8+11 x^9\right)$
+\begin{figure*}[htbp]
+	\centering
+	\includegraphics*[width = 0.8\textwidth]{image/result.png}
+\end{figure*}
+
+\section{实验总结}
+在此次实验中熟悉了对单链表的操作
+\end{document}

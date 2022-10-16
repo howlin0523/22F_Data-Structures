@@ -1,3 +1,13 @@
+/**
+ * @file main.cpp
+ * @author howlinggggg (howlin0523@mail.ustc.edu.cn)
+ * @brief 
+ * @version 0.1
+ * @date 2022-10-16
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -6,15 +16,20 @@
 #include "func.cpp"
 
 using namespace std;
-
+/**
+ * @brief 
+ * 
+ * @return int 
+ */
 int main()
 {
     Func F;
     bool flag = F.init();
     if (flag)
     {
+
         cout << "a+b=";
-        F.add();
+        F.plus();
         cout << "a-b=";
         F.minus();
         cout << "a\'(x)=";
