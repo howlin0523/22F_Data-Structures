@@ -236,11 +236,6 @@ float Func::calValue(float x)
     LNode *t = head[0];
     while (t->next)
     {
-        if ((x == 0 && t->next->expn == -1) || (x < 0 && t->next->expn > 0 && t->next->expn < 1))
-        {
-            cout << "Calculation error!" << endl;
-            return INT_MIN;
-        }
         sum += t->next->coef * pow(x, t->next->expn);
         t = t->next;
     }

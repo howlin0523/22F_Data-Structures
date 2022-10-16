@@ -21,7 +21,7 @@ private:
 public:
     Func()
     {
-        for (int i = 0; i < 6; ++i)
+        for (int i = 0; i < 6; i++)
         {
             LNode *headx = new (LNode);
             headx->coef = 0;

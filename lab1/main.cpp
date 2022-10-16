@@ -22,7 +22,7 @@ int main()
         cout << "input x:";
         cin.clear();
         cin.ignore();
-        float x=0;
+        float x = 0;
         cin >> x;
         cout << "a(" << x << ")=" << F.calValue(x) << endl;
     }
